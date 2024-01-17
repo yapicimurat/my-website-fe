@@ -22,18 +22,15 @@ const genericRequestHandler = async <T>(axiosResponse: Promise<AxiosResponse>): 
         });
 }
 
-const getAllWithRequestParameter = async <T extends Object>(url: string,
-                                requestParameters: {[key: string]: any} = {}): Promise<DataResponse<Array<T>>> => {
+const getAllWithRequestParameter = async <T extends Object>(url: string, requestParameters: {[key: string]: any} = {}): Promise<DataResponse<Array<T>>> => {
     return genericRequestHandler<Array<T>>(getWithRequestParameter(url, requestParameters));
 };
 
-const getAllWithPathVariable = async <T extends Object>(url: string,
-                                    pathVariables: {[key: string]: any} = {}): Promise<DataResponse<Array<T>>> => {
+const getAllWithPathVariable = async <T extends Object>(url: string, pathVariables: {[key: string]: any} = {}): Promise<DataResponse<Array<T>>> => {
     return genericRequestHandler<Array<T>>(getWithPathVariable(url, pathVariables));
 };
 
-const getSingleWithRequestParameter = async <T extends Object>(url: string,
-                                       requestParameters: {[key: string]: any} = {}): Promise<DataResponse<T>> => {
+const getSingleWithRequestParameter = async <T extends Object>(url: string, requestParameters: {[key: string]: any} = {}): Promise<DataResponse<T>> => {
     return genericRequestHandler<T>(getWithRequestParameter(url, requestParameters));
 };
 
