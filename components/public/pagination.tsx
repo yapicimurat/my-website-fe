@@ -1,6 +1,6 @@
 import {Article} from "../../service/model/article";
 import Pageable from "../../service/model/pageable";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import clsx from "clsx";
 import {clamp} from "../../util/util";
 
@@ -38,12 +38,10 @@ export default function Pagination(props: PaginationProps) {
     const drawPageButton = () => {
         const generatedPageItems = [];
         if(amountOfPage <= 10){
-            debugger;
             for(let i = 1; i <= amountOfPage; i++){
                 generatedPageItems.push(paginationItem(i));
             }
         }else{
-            debugger;
             const isDoubleNode = (current - 3 > 2 && current + 4 < amountOfPage - 1);
             const isLeftNode = (current - 3 > 2);
             const isRightNode = (current + 4 < amountOfPage - 1);
