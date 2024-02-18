@@ -5,9 +5,11 @@ import {Article} from "../../service/model/article";
 import ArticleCardPlaceholder from "./articleCardPlaceholder";
 import Pageable from "../../service/model/pageable";
 import Pagination from "../public/pagination";
+import {useArticleStore} from "../../store";
 
 export default function ArticleWrapper() {
-    const [loading, data] = useFetch<Pageable<Article>>(getAll);
+    const {currentPage, nextPage, previousPage} = useArticleStore((state) => state);
+    const [loading, data] = useFetch<Pageable<Article>>(getAll, currentPage);
 
     const renderArticleCardPlaceholder = () => {
         let placeholders = [];
@@ -22,7 +24,6 @@ export default function ArticleWrapper() {
             placeholders
         ) : null
     };
-
     const renderArticles = () => {
         if(!loading) {
             const articles: Array<Article> = (data as Pageable<Article>).elements;
