@@ -10,7 +10,7 @@ export default function ArticleCard(props: ArticleCardProp) {
     return (
         <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3">
             <div className="card bg-light">
-                <img src="/example.png" alt="no image"/>
+                <img src="/no-image.png" className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <h5 className="card-title">{props.article.title}</h5>
                     <p className="card-text">

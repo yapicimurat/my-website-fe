@@ -1,38 +1,36 @@
 import {Article} from "../../service/model/article";
 import Pageable from "../../service/model/pageable";
-import { useState} from "react";
 import clsx from "clsx";
-import {clamp} from "../../util/util";
 
 type PaginationProps = {
-    pageable: Pageable<Article>
+    pageable: Pageable<Article>,
+    current: number,
+    setPage: (page: number) => void
+    previousPage: () => void,
+    nextPage: () => void
 }
 
 export default function Pagination(props: PaginationProps) {
-    const [current, setCurrent] = useState(1);
-
     const calcAmountOfPage = Math.ceil(props.pageable.totalElementsPerPage * props.pageable.totalPages / props.pageable.totalElementsPerPage);
     const amountOfPage = (calcAmountOfPage >= 1) ? calcAmountOfPage : 1;
 
     const goPage = (pageNumber: number) => {
-        setCurrent(pageNumber);
+        props.setPage(pageNumber);
     };
 
     const paginationItem = (pageNumber: number) => {
         return (
-            <li key={pageNumber} style={{width: "40px"}} className={clsx({"text-center": true, "page-item": true, "active": (pageNumber === current)})}>
+            <li key={pageNumber} style={{width: "40px"}} className={clsx({"text-center": true, "page-item": true, "active": (pageNumber === props.current)})}>
                 <a role="button" className="page-link user-select-none" onClick={() => goPage(pageNumber)}>{pageNumber}</a>
             </li>
         );
     }
 
     const next = () => {
-        const newPage = clamp(current + 1, 1, amountOfPage);
-        setCurrent(newPage);
+        props.nextPage();
     };
     const previous = () => {
-        const newPage = clamp(current - 1, 1, amountOfPage)
-        setCurrent(newPage);
+        props.previousPage();
     };
 
     const drawPageButton = () => {
@@ -42,9 +40,9 @@ export default function Pagination(props: PaginationProps) {
                 generatedPageItems.push(paginationItem(i));
             }
         }else{
-            const isDoubleNode = (current - 3 > 2 && current + 4 < amountOfPage - 1);
-            const isLeftNode = (current - 3 > 2);
-            const isRightNode = (current + 4 < amountOfPage - 1);
+            const isDoubleNode = (props.current - 3 > 2 && props.current + 4 < amountOfPage - 1);
+            const isLeftNode = (props.current - 3 > 2);
+            const isRightNode = (props.current + 4 < amountOfPage - 1);
             const node = (
                 <li className="page-item">
                     <p className="page-link text-dark">...</p>
@@ -59,7 +57,7 @@ export default function Pagination(props: PaginationProps) {
                     </>
                 );
 
-                for(let i = current - 3; i <= (current - 3) + 7; i++){
+                for(let i = props.current - 3; i <= (props.current - 3) + 7; i++){
                     generatedPageItems.push(paginationItem(i));
                 }
 

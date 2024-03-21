@@ -8,12 +8,11 @@ export default function useFetch<T>(fetchMethod: ({}: any) => Promise<T>, params
         (async () => {
             setLoading(true);
             setData(await fetchMethod(params));
-
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            }, 350);
         })();
-    }, []);
+    }, [params]);
 
     return [loading, data];
 }

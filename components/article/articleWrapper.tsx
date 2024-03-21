@@ -6,48 +6,59 @@ import ArticleCardPlaceholder from "./articleCardPlaceholder";
 import Pageable from "../../service/model/pageable";
 import Pagination from "../public/pagination";
 import {useArticleStore} from "../../store";
+import {useEffect} from "react";
+import PaginationPlaceholder from "../public/paginationPlaceholder";
 
 export default function ArticleWrapper() {
-    const {currentPage, nextPage, previousPage} = useArticleStore((state) => state);
+    const {currentPage, nextPage, previousPage, setPage, setArticles} = useArticleStore((state) => state);
     const [loading, data] = useFetch<Pageable<Article>>(getAll, currentPage);
+
+    useEffect(() => {
+        if(data) {
+            setArticles(data as Pageable<Article>);
+        }
+    }, [data]);
+
 
     const renderArticleCardPlaceholder = () => {
         let placeholders = [];
 
-        for(let i = 1; i <= 8; i++) {
+        for(let i = 1; i <= 4; i++) {
             placeholders.push((
                 <ArticleCardPlaceholder key={i}/>
             ));
         }
 
         return (loading) ? (
-            placeholders
-        ) : null
+        <>
+            {placeholders}
+        </>
+        ) :
+        null
     };
+
     const renderArticles = () => {
-        if(!loading) {
-            const articles: Array<Article> = (data as Pageable<Article>).elements;
-            return (
-                <>
-                    <Pagination pageable={data as Pageable<Article>}/>
-                    <div className="container overflow-hidden">
+        return (
+            <>
+                <Pagination pageable={data as Pageable<Article>} current={currentPage} setPage={setPage} nextPage={nextPage} previousPage={previousPage} />
+                <div className="container overflow-hidden">
+                    {(!loading) ? (
                         <div className="row">
-                            {articles.map((article, index) => {
+                            {(data as Pageable<Article>).elements.map((article, index) => {
                                 return <ArticleCard key={index} article={article}/>
                             })}
                         </div>
-                    </div>
-                </>
-            )
-        }
-
-        return null;
+                    ): (
+                        renderArticleCardPlaceholder()
+                    )}
+                </div>
+            </>
+        )
     };
 
     const listArticles = () => {
         return (
             <>
-                {renderArticleCardPlaceholder()}
                 {renderArticles()}
             </>
         )
