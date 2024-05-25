@@ -47,6 +47,7 @@ export const getWithRequestParameter = (url: string, requestParameters: {[key: s
 export const getWithPathVariable = (url: string, pathVariables: {[key: string]: any},
                                     config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
     const fullURL = url + createFullURLForPathVariable(pathVariables);
+    debugger;
     if(Object.keys(config).length === 0) {
         return axiosInstance.get(fullURL);
     }else {

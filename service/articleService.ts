@@ -1,6 +1,6 @@
 import {DataResponse} from "./response/response";
 import {GET_REQUEST} from "./genericService";
-import {Article} from "./model/article";
+import {Article} from "./model/article/article";
 import Pageable from "./model/pageable";
 
 export const getAll = async (page: number = 0): Promise<Pageable<Article>> => {

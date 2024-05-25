@@ -1,4 +1,4 @@
-import {Article} from "../../service/model/article";
+import {Article} from "../../service/model/article/article";
 import {clampStr} from "../../util/util";
 
 type ArticleCardProp = {

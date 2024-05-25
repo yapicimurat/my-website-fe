@@ -1,4 +1,4 @@
-import {Article} from "../../service/model/article";
+import {Article} from "../../service/model/article/article";
 import Pageable from "../../service/model/pageable";
 import clsx from "clsx";
 
@@ -11,6 +11,19 @@ type PaginationProps = {
 }
 
 export default function Pagination(props: PaginationProps) {
+    if(!props.pageable) {
+        return (
+            <div className="row">
+                <div className="col-12 d-flex flex-row justify-content-end">
+                    <nav className="mb-1" aria-label="Page navigation example">
+                        <p className="text-end" aria-hidden="true">
+                            <span className="placeholder col-3 placeholder-lg rounded-3"></span>
+                        </p>
+                    </nav>
+                </div>
+            </div>
+        )
+    }
     const calcAmountOfPage = Math.ceil(props.pageable.totalElementsPerPage * props.pageable.totalPages / props.pageable.totalElementsPerPage);
     const amountOfPage = (calcAmountOfPage >= 1) ? calcAmountOfPage : 1;
 
@@ -20,8 +33,10 @@ export default function Pagination(props: PaginationProps) {
 
     const paginationItem = (pageNumber: number) => {
         return (
-            <li key={pageNumber} style={{width: "40px"}} className={clsx({"text-center": true, "page-item": true, "active": (pageNumber === props.current)})}>
-                <a role="button" className="page-link user-select-none" onClick={() => goPage(pageNumber)}>{pageNumber}</a>
+            <li key={pageNumber} style={{width: "40px"}}
+                className={clsx({"text-center": true, "page-item": true, "active": (pageNumber === props.current)})}>
+                <a role="button" className="page-link user-select-none"
+                   onClick={() => goPage(pageNumber)}>{pageNumber}</a>
             </li>
         );
     }

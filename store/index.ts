@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import {Article} from "../service/model/article";
+import {Article} from "../service/model/article/article";
 import Pageable from "../service/model/pageable";
 
 interface ArticleState {

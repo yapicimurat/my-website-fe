@@ -1,17 +1,16 @@
 import useFetch from "../../hook/useFetch";
 import {getAll} from "../../service/articleService";
 import ArticleCard from "./articleCard";
-import {Article} from "../../service/model/article";
+import {Article} from "../../service/model/article/article";
 import ArticleCardPlaceholder from "./articleCardPlaceholder";
 import Pageable from "../../service/model/pageable";
 import Pagination from "../public/pagination";
 import {useArticleStore} from "../../store";
 import {useEffect} from "react";
-import PaginationPlaceholder from "../public/paginationPlaceholder";
 
 export default function ArticleWrapper() {
     const {currentPage, nextPage, previousPage, setPage, setArticles} = useArticleStore((state) => state);
-    const [loading, data] = useFetch<Pageable<Article>>(getAll, currentPage);
+    const [loading, data] = useFetch<Pageable<Article>>(getAll,  );
 
     useEffect(() => {
         if(data) {
@@ -30,9 +29,9 @@ export default function ArticleWrapper() {
         }
 
         return (loading) ? (
-        <>
-            {placeholders}
-        </>
+            <>
+                {placeholders}
+            </>
         ) :
         null
     };
@@ -40,17 +39,17 @@ export default function ArticleWrapper() {
     const renderArticles = () => {
         return (
             <>
-                <Pagination pageable={data as Pageable<Article>} current={currentPage} setPage={setPage} nextPage={nextPage} previousPage={previousPage} />
                 <div className="container overflow-hidden">
-                    {(!loading) ? (
-                        <div className="row">
-                            {(data as Pageable<Article>).elements.map((article, index) => {
+                    <Pagination pageable={data as Pageable<Article>} current={currentPage} setPage={setPage} nextPage={nextPage} previousPage={previousPage} />
+                    <div className="row">
+                        {(!loading) ? (
+                            (data as Pageable<Article>).elements.map((article, index) => {
                                 return <ArticleCard key={index} article={article}/>
-                            })}
-                        </div>
-                    ): (
-                        renderArticleCardPlaceholder()
-                    )}
+                            })
+                        ): (
+                            renderArticleCardPlaceholder()
+                        )}
+                    </div>
                 </div>
             </>
         )
@@ -59,6 +58,7 @@ export default function ArticleWrapper() {
     const listArticles = () => {
         return (
             <>
+
                 {renderArticles()}
             </>
         )

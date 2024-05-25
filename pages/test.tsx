@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Article} from "../service/model/article";
+import {Article} from "../service/model/article/article";
 import {getAll} from "../service/articleService";
 
 
