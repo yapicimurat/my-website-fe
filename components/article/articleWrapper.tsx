@@ -5,12 +5,12 @@ import {Article} from "../../service/model/article/article";
 import ArticleCardPlaceholder from "./articleCardPlaceholder";
 import Pageable from "../../service/model/pageable";
 import Pagination from "../public/pagination";
-import {useArticleStore} from "../../store";
+import {useArticleStore} from "../../store/article";
 import {useEffect} from "react";
 
 export default function ArticleWrapper() {
     const {currentPage, nextPage, previousPage, setPage, setArticles} = useArticleStore((state) => state);
-    const [loading, data] = useFetch<Pageable<Article>>(getAll,  );
+    const [loading, data] = useFetch<Pageable<Article>>(getAll, currentPage);
 
     useEffect(() => {
         if(data) {

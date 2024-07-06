@@ -2,12 +2,8 @@ import Image from "next/image";
 import Comments from "../comment/comments";
 import {Article} from "../../service/model/article/article";
 
-type ArticleContentProp = {
-    articleId: string
-}
 
-export default function ArticleContent(props: ArticleContentProp): JSX.Element {
-
+export default function ArticleContent(): JSX.Element {
     return (
         <>
             <nav className="row mt-4">
@@ -57,7 +53,7 @@ export default function ArticleContent(props: ArticleContentProp): JSX.Element {
 
                 Nulla aliquet, felis nec fringilla facilisis, nulla sapien pellentesque dui, et auctor mi est quis erat. Donec convallis elit ligula, nec rutrum risus euismod sed. Praesent id aliquam sem. Donec eget lobortis erat. Aliquam sagittis venenatis massa sed elementum. Curabitur sollicitudin massa nulla, ut dictum orci efficitur nec. Fusce vitae luctus eros. Integer sollicitudin ex id lorem placerat, blandit interdum tortor lacinia. Aenean sapien tellus, venenatis sed justo in, dapibus interdum turpis. Donec nec placerat purus, quis lacinia eros.
             </article>
-            <Comments articleId={props.articleId}/>
+            <Comments/>
         </>
     );
 }

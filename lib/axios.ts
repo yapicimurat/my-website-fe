@@ -25,13 +25,11 @@ const createFullURLForRequestParameter = (requestParameters: {[key: string]: any
     return result.substring(0, result.length - 1); //remove last "&"
 };
 
-const createFullURLForPathVariable = (pathVariables: {[key: string]: any}) => {
-    //burada key'lere ihtiyac yok ama gonderirken ne icin hangi degeri yazdigimi rahatca bilebilirim diye koydum
-    let result: string = "/";
+const createFullURLForPathVariable = (url: string, pathVariables: {[key: string]: any}) => {
     Object.keys(pathVariables).forEach(key => {
-        result = result + pathVariables[key] + "/";
+        url = url.replace(`{${key}}`, pathVariables[key])
     });
-    return result.substring(0, result.length - 1); //remove last "/"
+    return url //remove last "/"
 }
 
 export const getWithRequestParameter = (url: string, requestParameters: {[key: string]: any},
@@ -46,8 +44,7 @@ export const getWithRequestParameter = (url: string, requestParameters: {[key: s
 
 export const getWithPathVariable = (url: string, pathVariables: {[key: string]: any},
                                     config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
-    const fullURL = url + createFullURLForPathVariable(pathVariables);
-    debugger;
+    const fullURL = createFullURLForPathVariable(url, pathVariables);
     if(Object.keys(config).length === 0) {
         return axiosInstance.get(fullURL);
     }else {
@@ -69,7 +66,7 @@ export const postWithRequestParameter = (url: string,
 export const postWithPathVariable = (url: string,
                              pathVariables: {[key: string]: any},
                              requestBody: Object, config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
-    const fullURL = url + createFullURLForPathVariable(pathVariables);
+    const fullURL = url + createFullURLForPathVariable(url, pathVariables);
     if(Object.keys(config).length === 0) {
         return axiosInstance.post(fullURL,requestBody);
     }else {
@@ -91,7 +88,7 @@ export const putWithRequestParameter = (url: string,
 export const putWithPathVariable = (url: string,
                                      pathVariables: {[key: string]: any},
                                      requestBody: Object, config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
-    const fullURL = url + createFullURLForPathVariable(pathVariables);
+    const fullURL = url + createFullURLForPathVariable(url, pathVariables);
     if(Object.keys(config).length === 0) {
         return axiosInstance.put(fullURL,requestBody);
     }else {
@@ -113,7 +110,7 @@ export const deleteWithRequestParameter = (url: string,
 export const deleteWithPathVariable = (url: string,
                                            pathVariables: {[key: string]: any},
                                            config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
-    const fullURL = url + createFullURLForPathVariable(pathVariables);
+    const fullURL = url + createFullURLForPathVariable(url, pathVariables);
     if(Object.keys(config).length === 0) {
         return axiosInstance.delete(fullURL, config);
     }else {
