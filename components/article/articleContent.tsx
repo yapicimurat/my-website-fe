@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Comments from "../comment/comments";
 import {Article} from "../../service/model/article/article";
+import {useGeneralStore} from "../../store";
+import {getAllByArticleId} from "../../service/commentService";
 
 
 export default function ArticleContent(): JSX.Element {
+    const selectedArticleId = useGeneralStore(state => state.selectedArticleId);
+
     return (
         <>
             <nav className="row mt-4">
@@ -53,7 +57,8 @@ export default function ArticleContent(): JSX.Element {
 
                 Nulla aliquet, felis nec fringilla facilisis, nulla sapien pellentesque dui, et auctor mi est quis erat. Donec convallis elit ligula, nec rutrum risus euismod sed. Praesent id aliquam sem. Donec eget lobortis erat. Aliquam sagittis venenatis massa sed elementum. Curabitur sollicitudin massa nulla, ut dictum orci efficitur nec. Fusce vitae luctus eros. Integer sollicitudin ex id lorem placerat, blandit interdum tortor lacinia. Aenean sapien tellus, venenatis sed justo in, dapibus interdum turpis. Donec nec placerat purus, quis lacinia eros.
             </article>
-            <Comments/>
+            <h5 className="mt-3 border-bottom border-1 border-black">YORUMLAR</h5>
+            {selectedArticleId && <Comments fetchMethod={getAllByArticleId} params={{articleId: selectedArticleId}}/>}
         </>
     );
 }

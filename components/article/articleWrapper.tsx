@@ -11,7 +11,6 @@ import {useEffect} from "react";
 export default function ArticleWrapper() {
     const {currentPage, nextPage, previousPage, setPage, setArticles} = useArticleStore((state) => state);
     const [loading, data] = useFetch<Pageable<Article>>(getAll, currentPage);
-
     useEffect(() => {
         if(data) {
             setArticles(data as Pageable<Article>);
@@ -41,7 +40,7 @@ export default function ArticleWrapper() {
             <>
                 <div className="container overflow-hidden">
                     <Pagination pageable={data as Pageable<Article>} current={currentPage} setPage={setPage} nextPage={nextPage} previousPage={previousPage} />
-                    <div className="row">
+                    <div className="list-group">
                         {(!loading) ? (
                             (data as Pageable<Article>).elements.map((article, index) => {
                                 return <ArticleCard key={index} article={article}/>
@@ -54,6 +53,15 @@ export default function ArticleWrapper() {
             </>
         )
     };
+    /*
+    * <ul className="list-group">
+                                {
+                                    (data as Pageable<Article>).elements.map((article, index) => {
+                                        return <ArticleCard key={index} article={article}/>
+                                    })
+                                }
+                            </ul>
+    * */
 
     const listArticles = () => {
         return (

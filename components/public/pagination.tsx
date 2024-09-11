@@ -117,11 +117,13 @@ export default function Pagination(props: PaginationProps) {
             <div className="col-12 d-flex flex-row justify-content-end">
                 <nav className="mb-1" aria-label="Page navigation example">
                     <ul className="pagination pagination-sm">
-                        <li className="page-item"><a role="button" className="page-link user-select-none"
-                                                     onClick={previous}>&laquo;</a></li>
+                        <li className="page-item">
+                            <a role="button" className="page-link user-select-none" onClick={previous}>Önceki</a>
+                        </li>
                         {drawPageButton()}
-                        <li className="page-item"><a role="button" className="page-link user-select-none"
-                                                     onClick={next}>&raquo;</a></li>
+                        <li className="page-item">
+                            <a role="button" className="page-link user-select-none" onClick={next}>Sonraki</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

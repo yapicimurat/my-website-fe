@@ -10,11 +10,10 @@ import {useEffect} from "react";
 export default function ArticleContentPage() {
     const router = useRouter();
 
-    const {setSelectedArticleId} = useGeneralStore(state => state)
+    const {setSelectedArticleId} = useGeneralStore(state => state);
 
     useEffect(() => {
         if(router.query?.id) {
-            console.log("girdi")
             setSelectedArticleId(String(router.query.id));
         }
     }, [router.query.id]);

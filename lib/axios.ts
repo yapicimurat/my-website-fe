@@ -66,7 +66,7 @@ export const postWithRequestParameter = (url: string,
 export const postWithPathVariable = (url: string,
                              pathVariables: {[key: string]: any},
                              requestBody: Object, config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
-    const fullURL = url + createFullURLForPathVariable(url, pathVariables);
+    const fullURL = createFullURLForPathVariable(url, pathVariables);
     if(Object.keys(config).length === 0) {
         return axiosInstance.post(fullURL,requestBody);
     }else {

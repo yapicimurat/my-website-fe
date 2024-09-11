@@ -4,5 +4,7 @@ export type Article = {
     description: string,
     htmlContent: string,
     coverImageURL: string,
-    readTimeInMinute: number
+    readTimeInMinute: number,
+    amountOfAnswers: number,
+    createdAt: string
 };
