@@ -1,9 +1,9 @@
-import {Article} from "../../service/model/article/article";
+import { ArticleSummary } from "../../service/model/article/articleSummary";
 import Pageable from "../../service/model/pageable";
 import clsx from "clsx";
 
 type PaginationProps = {
-    pageable: Pageable<Article>,
+    pageable: Pageable<ArticleSummary>,
     current: number,
     setPage: (page: number) => void
     previousPage: () => void,

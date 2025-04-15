@@ -1,17 +1,24 @@
-
 export default function ArticleCardPlaceholder() {
-    return (
-        <a href="#" className="list-group-item list-group-item-action" style={{height: "75px"}}>
-            <div className="row d-flex justify-content-between">
-                <span className="mb-1 placeholder placeholder-xs col-2"></span>
-            </div>
-            <div className="row">
-                <p className="mb-1 col-6 placeholder placeholder-sm"></p>
-
-            </div>
-            <div className="row">
-                <small className="text-body-secondary col-2 placeholder placeholder-sm"></small>
-            </div>
-        </a>
-    )
+  return (
+    <div className="card mb-3 shadow-sm" aria-hidden="true">
+      <div className="card-body">
+        <h5 className="card-title placeholder-glow">
+          <span className="placeholder col-6"></span>
+        </h5>
+        <p className="card-text placeholder-glow">
+          <span className="placeholder col-7"></span>
+          <span className="placeholder col-4"></span>
+        </p>
+        <div className="d-flex justify-content-between align-items-center">
+          <small className="placeholder col-1"></small>
+          <span className="btn btn-sm btn-outline-primary disabled placeholder col-1"></span>
+        </div>
+        <div className="d-flex flex-wrap gap-1 placeholder-glow">
+          <span className="placeholder col-1 rounded-pill"></span>
+          <span className="placeholder col-1 rounded-pill"></span>
+          <span className="placeholder col-1 rounded-pill"></span>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -9,7 +9,6 @@ import {useEffect} from "react";
 
 export default function ArticleContentPage() {
     const router = useRouter();
-
     const {setSelectedArticleId} = useGeneralStore(state => state);
 
     useEffect(() => {

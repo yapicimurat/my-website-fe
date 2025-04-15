@@ -1,3 +1,5 @@
+import { Category } from "../category/category";
+
 export type Article = {
     id: string,
     title: string,
@@ -6,5 +8,6 @@ export type Article = {
     coverImageURL: string,
     readTimeInMinute: number,
     amountOfAnswers: number,
-    createdAt: string
+    createdAt: string,
+    categories: Category[],
 };

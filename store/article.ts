@@ -1,14 +1,14 @@
 import {create} from 'zustand';
-import {Article} from "../service/model/article/article";
 import Pageable from "../service/model/pageable";
+import { ArticleSummary } from '../service/model/article/articleSummary';
 
 interface ArticleState {
-    articles: Pageable<Article>,
+    articles: Pageable<ArticleSummary>,
     currentPage: number,
     nextPage: () => void,
     previousPage: () => void,
     setPage: (page: number) => void,
-    setArticles: (pageable: Pageable<Article>) => void,
+    setArticles: (pageable: Pageable<ArticleSummary>) => void,
 }
 
 
@@ -17,7 +17,7 @@ export const useArticleStore = create<ArticleState>((set) => ({
         elements: [],
         totalPages: 0,
         totalElementsPerPage: 0,
-        currentPage: 0,
+        currentPage: 1,
         hasNext: false,
         hasPrevious: false,
     },
