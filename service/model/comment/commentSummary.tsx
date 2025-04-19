@@ -7,5 +7,6 @@ export type CommentSummary = {
     isAnswer: boolean,
     amountOfAnswers: number,
     createdAt: string,
-    parentCommentId: string,
+    parentComment: CommentSummary,
+    rootComment: CommentSummary,
 }
